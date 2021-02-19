@@ -3,6 +3,7 @@
 // API key; in the form, indicate that you'll be using this API
 // key for educational or personal use, and you should receive
 // your new key right away.
+//API KEY 6d6fc7aaf645ebf42c135e634a8ba806
 
 // For this exercise, we'll be using the "now playing" API endpoint
 // https://api.themoviedb.org/3/movie/now_playing?api_key=${apiKey}&language=en-US
@@ -18,8 +19,49 @@ window.addEventListener('DOMContentLoaded', async function(event) {
   // console to ensure you've got good data
   // ⬇️ ⬇️ ⬇️
 
+// let db = firebase.firestore()
+// let querySnapshot = await db.collection('movies').get()
+// let firemovies = querySnapshot.docs
+let response = await fetch('https://api.themoviedb.org/3/movie/now_playing?api_key=6d6fc7aaf645ebf42c135e634a8ba806&language=en-US')
+
+let json = await response.json()
+let movies = json.results
+console.log(movies)
+
   // ⬆️ ⬆️ ⬆️ 
   // End Step 1
+
+
+for(let i = 0; i < movies.length; i++){
+  let movieId = movies[i].id
+  let poster = movies[i].poster_path
+
+  document.querySelector('.movies').insertAdjacentHTML('beforeend', `<div class=".movies-${movieId} w-1/5 p-4">
+
+  <img src="https://image.tmdb.org/t/p/w500/${poster}" class="w-full">
+  <a href="#" class="watched-button block text-center text-white bg-green-500 mt-4 px-4 py-2 rounded">Watched✓</a>
+  </div>
+  `)
+
+  document.querySelector(`.watched-button`).addEventListener('click', async function(event){
+    event.preventDefault()
+
+    document.querySelector('.movies').classList.add('opacity-20')
+    
+    console.log(`Alexis watched ${movieId}.`)
+
+    let db = firebase.firestore()
+    let querySnapshot = await db.collection('watched').get()
+    let watched = querySnapshot.docs
+    for (let j = 0; j < watched.length; j++){
+    let watched = watched[j].data()
+    watched.name
+    }
+  })
+
+  }
+
+
   
   // Step 2: 
   // - Loop through the Array called movies and insert HTML
@@ -29,11 +71,10 @@ window.addEventListener('DOMContentLoaded', async function(event) {
   //   ID field.
   // Some HTML that would look pretty good... replace with real values :)
   // <div class="w-1/5 p-4 movie-abcdefg1234567">
-  //   <img src="https://image.tmdb.org/t/p/w500/moviePosterPath.jpg" class="w-full">
-  //   <a href="#" class="watched-button block text-center text-white bg-green-500 mt-4 px-4 py-2 rounded">I've watched this!</a>
+  // <img src="https://image.tmdb.org/t/p/w500/moviePosterPath.jpg" class="w-full">
+  // <a href="#" class="watched-button block text-center text-white bg-green-500 mt-4 px-4 py-2 rounded">I've watched this!</a>
   // </div>
   // ⬇️ ⬇️ ⬇️
-
   // ⬆️ ⬆️ ⬆️ 
   // End Step 2
 
