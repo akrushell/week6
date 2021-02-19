@@ -6,13 +6,36 @@
   <title>Movies</title>
   <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet" type="text/css">
 </head>
-<body class="bg-gray-800">
+<body class="bg-gray-500">
   
   <div class="movies p-16 md:flex md:flex-wrap">
     <!-- JavaScript puts stuff here -->
   </div>
 
   <!-- Put the Firebase config here -->
+
+  <!-- Copy and paste these scripts into the bottom of your <body> tag, but before you use any Firebase services: -->
+
+
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/8.2.8/firebase-app.js"></script>
+    
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+         https://firebase.google.com/docs/web/setup#available-libraries -->
+    
+    <script>
+      // Your web app's Firebase configuration
+      var firebaseConfig = {
+        apiKey: "AIzaSyAC6LhcCBH4RkJ7hrmks9EAqa8Wf985gBw",
+        authDomain: "kiei-451-b6565.firebaseapp.com",
+        projectId: "kiei-451-b6565",
+        storageBucket: "kiei-451-b6565.appspot.com",
+        messagingSenderId: "157668042962",
+        appId: "1:157668042962:web:678def4b939e70ba2c650b"
+      };
+      // Initialize Firebase
+      firebase.initializeApp(firebaseConfig);
+    </script>
 
   <script src="movies.js"></script>
 </body>
